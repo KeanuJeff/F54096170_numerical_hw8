@@ -1,0 +1,24 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def f(x):
+    return 0.5 * np.cos(x) + 0.25 * np.sin(2*x)
+
+
+n = 100
+x = np.linspace(-1, 1, n)
+y = f(x)
+
+
+A = np.vstack([np.ones_like(x), x, x**2]).T
+
+
+a = np.linalg.lstsq(A, y, rcond=None)[0]
+
+
+def p(x):
+    return a[0] + a[1]*x + a[2]*x**2
+
+
+print(f"Approximation polynomial: p(x) = {a[0]:.6f} + {a[1]:.6f}x + {a[2]:.6f}x^2")
